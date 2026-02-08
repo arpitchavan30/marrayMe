@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Marry Me ❤️</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 95vw;
+      height: 90vh;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      box-shadow: 0 0 40px rgba(255, 0, 100, 0.3);
+      padding: 20px 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .layout { display: flex; height: 100%; width: 100%; }
+
+    .left, .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .left { border-right: 2px solid rgba(255,255,255,0.3); }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255, 0, 100, 0.6);
+      text-align: center;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      position: relative;
+      width: 320px;
+      height: 140px;
+    }
+
+    button {
+      padding: 14px 36px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.15s ease;
+      position: absolute;
+      user-select: none;
+    }
+
+    #yesBtn {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      left: 20px;
+      top: 40px;
+      box-shadow: 0 0 15px rgba(255, 0, 100, 0.6);
+      z-index: 2;
+    }
+
+    #noBtn {
+      background: #fff;
+      color: #ff4b2b;
+      right: 20px;
+      top: 40px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+      pointer-events: none; /* makes No button unclickable */
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .photo-container {
+      display: none;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .photo-container img {
+      max-width: 260px;
+      max-height: 260px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 0, 100, 0.6);
+    }
+
+    .love-text {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(255, 0, 100, 0.6);
+    }
+
+    .right { padding: 10px 30px; }
+
+    .poem {
+      color: #fff;
+      text-align: center;
+      font-size: 1.15rem;
+      line-height: 1.25;
+      font-weight: 800;
+      text-shadow: 0 0 6px rgba(255, 0, 100, 0.4);
+    }
+
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 0, 100, 0.6);
+      font-size: 20px;
+      animation: float 8s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="container" id="mainBox">
+  <div class="layout">
+
+    <!-- LEFT -->
+    <div class="left">
+      <h1>💍 Will You Marry Me? 💖</h1>
+
+      <div class="buttons" id="btnArea">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No 💔</button>
+      </div>
+
+      <div class="photo-container" id="photoBox">
+        <div class="love-text">I Love You Forever ❤️</div>
+        <img id="lovePhoto" src="" alt="Love Photo" />
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <div class="poem">
+        <p>एक होकार दे , फार काही नको</p>
+        <p>फार काही नको, फक्त नाही नको</p>
+        <p>एकदा दोनदा ठीक आहे सखे</p>
+        <p>पण तुझे लाजणे बारमाही नको</p>
+        <p>एक होकार दे फार काही नको</p>
+        <p>थेट स्पर्शातून बोल काहितरी</p>
+        <p>गूळ शब्दातली मौन ग्वाही नको</p>
+        <p>फार काही नको फक्त नाही नको</p>
+        <p>आपले भेटणे हीच कोजागिरी</p>
+        <p>चांदणे ही नको चांदवाहि नको</p>
+        <p>एक होकार दे फार काही नको..</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.getElementById('yesBtn');
+  const btnArea = document.getElementById('btnArea');
+  const photoBox = document.getElementById('photoBox');
+  const heartsContainer = document.getElementById('hearts');
+
+  // No button is intentionally disabled (cannot be clicked)
+  noBtn.title = "No is not an option 😄";
+
+  // Fun shake animation on hover area
+  btnArea.addEventListener('mousemove', (e) => {
+    const rect = noBtn.getBoundingClientRect();
+    const distX = Math.abs(e.clientX - (rect.left + rect.width/2));
+    const distY = Math.abs(e.clientY - (rect.top + rect.height/2));
+
+    if(distX < 80 && distY < 50){
+      noBtn.style.transform = `translate(${Math.random()*6-3}px, ${Math.random()*6-3}px)`;
+    } else {
+      noBtn.style.transform = 'translate(0,0)';
+    }
+  });
+
+  // Yes click
+  yesBtn.addEventListener('click', () => {
+    btnArea.style.display = 'none';
+    photoBox.style.display = 'block';
+  });
+
+  // Floating hearts
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '❤';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+    heart.style.fontSize = (15 + Math.random() * 25) + 'px';
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+  }
+
+  setInterval(createHeart, 300);
+
+  // document.getElementById('lovePhoto').src = "YOUR_IMAGE_LINK_HERE";
+</script>
+
+</body>
+</html>
