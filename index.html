@@ -85,7 +85,7 @@
       top: 40px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       z-index: 2;
-      pointer-events: none; /* makes No button unclickable */
+      pointer-events: none;
       opacity: 0.6;
       cursor: not-allowed;
     }
@@ -94,6 +94,7 @@
       display: none;
       margin-top: 25px;
       text-align: center;
+      animation: zoomIn 1.5s ease;
     }
 
     .photo-container img {
@@ -144,6 +145,26 @@
       20% { opacity: 1; }
       100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
     }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.3); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: red;
+      animation: fall 3s linear forwards;
+      z-index: 999;
+      border-radius: 50%;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -153,7 +174,6 @@
 <div class="container" id="mainBox">
   <div class="layout">
 
-    <!-- LEFT -->
     <div class="left">
       <h1>💍 Will You Marry Me? 💖</h1>
 
@@ -168,7 +188,6 @@
       </div>
     </div>
 
-    <!-- RIGHT -->
     <div class="right">
       <div class="poem">
         <p>एक होकार दे , फार काही नको</p>
@@ -195,10 +214,8 @@
   const photoBox = document.getElementById('photoBox');
   const heartsContainer = document.getElementById('hearts');
 
-  // No button is intentionally disabled (cannot be clicked)
   noBtn.title = "No is not an option 😄";
 
-  // Fun shake animation on hover area
   btnArea.addEventListener('mousemove', (e) => {
     const rect = noBtn.getBoundingClientRect();
     const distX = Math.abs(e.clientX - (rect.left + rect.width/2));
@@ -211,13 +228,14 @@
     }
   });
 
-  // Yes click
   yesBtn.addEventListener('click', () => {
     btnArea.style.display = 'none';
-    photoBox.style.display = 'block';
+    celebrate();
+    setTimeout(() => {
+      photoBox.style.display = 'block';
+    }, 1200);
   });
 
-  // Floating hearts
   function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('heart');
@@ -226,16 +244,30 @@
     heart.style.animationDuration = (5 + Math.random() * 5) + 's';
     heart.style.fontSize = (15 + Math.random() * 25) + 'px';
     heartsContainer.appendChild(heart);
-
     setTimeout(() => heart.remove(), 8000);
   }
 
   setInterval(createHeart, 300);
 
+  function celebrate(){
+    for(let i=0;i<30;i++){
+      createHeart();
+    }
+
+    for(let i=0;i<80;i++){
+      const conf = document.createElement('div');
+      conf.classList.add('confetti');
+      conf.style.left = Math.random()*100 + 'vw';
+      conf.style.background = `hsl(${Math.random()*360},100%,60%)`;
+      conf.style.animationDuration = (2 + Math.random()*2) + 's';
+      document.body.appendChild(conf);
+      setTimeout(()=>conf.remove(), 3000);
+    }
+  }
+
+  // 👉 Replace this with your RAW GitHub image link
   document.getElementById('lovePhoto').src = "https://arpitchavan30.github.io/marrayMe/WhatsApp%20Image%202025-03-30%20at%2009.56.05.jpeg";
 </script>
 
 </body>
 </html>
-
-
